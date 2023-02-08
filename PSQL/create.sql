@@ -17,3 +17,13 @@ create if not exists products (
     CONSTRAINT products_category_fk foreign key(category)
     REFERENCES category(id)
 );
+
+
+create table if not exists users (
+    id bigserial PRIMARY KEY,
+    firtname varchar(15) NOT NULL,
+    lastname varchar(20) NOT NULL,
+    email varchar(40) NOT NULL UNIQUE,
+    password varchar(100) NOT NULL,
+    status char(1) DEFAULT '0'
+)

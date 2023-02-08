@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Register</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!-- Cần có bản này mới chạy được câu lệnh jquery ở dưới -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  </head>
+</head>
 <body>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,70 +32,48 @@
               <li class="nav-item">
                 <a class="nav-link" href="#"> <i class="fas fa-info-circle"></i> About</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fas fa-at"></i> Contact
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#"><i class="fab fa-github"></i> Github</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="far fa-envelope"></i> Gmail</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-                </ul>
-              </li>
+             
             </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-info" type="submit">Search </button>
-            </form>
+            <div class="form-inline my-2 my-lg-0">
+              <a href="/login" class="btn btn-outline-success">Login <i class="fas fa-sign-in-alt"></i></a>
+            </div>
           </div>
         </div>
       </nav>
-
-      <hr/>
+      <hr>
+      {{ if (ne .Alert.Message "")}}
+      <p class="alert alert-{{.Alert.Type}}">{{.Alert.Message}}</p>
+      {{ end }}
       <div class="row">
         <div class="col-md-12">
-          <p class="float-end">
-            <a href="/register" class="btn btn-primary">Register <i class="far fa-user-circle"></i></a>
-            <a href="/login" class="btn btn-outline-primary">Login <i class="fas fa-sign-in-alt"></i></a>
-          </p>
-          <form action="" method="post">
-            <div class="form-group">
-              <input type="text" name="search" id="search" class="form-control" placeholder="Search product"/>
-            </div>
-          </form>
+            <h3 class="logo"> Register </h3>
+            <br class="my-4">
+            <form action="" method="POST">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="firstname">First name</label>
+                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Nhap ten"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="lastname">Last name</label>
+                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Nhap ho"/> 
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Email@email.com"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="*********"/>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Register <i class="far fa-save"></i> </button>
+            </form>
         </div>
       </div>
-      <div class="row">
-          <div class="col -md-12">
-              <div id="data-table">
-                <p class="text-center">Type for searching</p>
-              </div>
-          </div>
-      </div>
-
     </div>
-
-    <script>
-      var ajaxSearch = (search) => {
-        $.ajax({
-          type: 'POST',
-          dataType : 'html',
-          url : '/',
-          beforeSend : () => {
-            $("#data-table").html("Searching....");
-          },
-          data : {search: search},
-          success : (r) => {
-            $("#data-table").html(r)
-          }
-        });
-      };
-
-      $("#search").keyup(() => {
-        ajaxSearch($("#search").val());
-      });
-    </script>
 </body>
 </html>
 
